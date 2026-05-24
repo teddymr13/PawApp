@@ -5,6 +5,8 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY || 'placeholder',
 });
 
+import { supabase } from '@/lib/supabase';
+
 function parseBase64(dataUrl: string) {
   const matches = dataUrl.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   if (matches && matches.length === 3) {
@@ -20,7 +22,7 @@ function parseBase64(dataUrl: string) {
 
 export async function POST(req: Request) {
   try {
-    const { message, imageBase64, catProfile, history } = await req.json();
+    const { message, imageBase64, catProfile, history, catId } = await req.json();
 
     const { name, breed, age, weight, isNeutered, allergies, medicalHistory } = catProfile;
 
@@ -38,7 +40,8 @@ Riwayat Medis: ${medicalHistory || 'Tidak ada/Belum diisi'}
 Gunakan bahasa Indonesia kasual, ramah, dan sering menggunakan emoji kucing/hewan (🐾, 😸, 😿, dll).
 Jika pengguna menanyakan hal di luar konteks kucing (seperti politik, otomotif, pemrograman, dll), tolak dengan halus dan arahkan kembali ke topik kucing.
 Jika pengguna mengunggah gambar, analisis gejalanya dan berikan rekomendasi, tapi selalu tekankan bahwa ini bukan diagnosis medis pasti.
-PENTING: Gunakan informasi Profil Klinis Kucing dengan seksama. Contoh: jika pengguna menanyakan porsi makanan, hitung kalori harian berdasarkan BERAT BADAN dan STATUS STERIL yang ada di profil klinis.`;
+PENTING: Gunakan informasi Profil Klinis Kucing dengan seksama. Contoh: jika pengguna menanyakan porsi makanan, hitung kalori harian berdasarkan BERAT BADAN dan STATUS STERIL yang ada di profil klinis.
+Jika kucing mengalami gejala medis atau pengguna mengunggah gambar penyakit, Anda WAJIB menyertakan skor keparahan di bagian paling akhir pesan dalam format: [SCORE: X/10] (di mana X adalah angka 1-10).`;
 
     const internalPromptText = `${profileContext}\n\nPertanyaan pemilik: ${message || 'Tolong analisis gambar ini berdasarkan profil klinisku.'}`;
     
@@ -82,6 +85,14 @@ PENTING: Gunakan informasi Profil Klinis Kucing dengan seksama. Contoh: jika pen
     const disclaimer = "\n\n**Perhatian:** *Saran ini bersifat edukatif dan bukan pengganti diagnosis medis. Jika kucingmu menunjukkan gejala darurat, segera bawa ke dokter hewan.*";
     
     botReply += disclaimer;
+
+    // Save to chat_history if catId is provided
+    if (catId) {
+      await supabase.from('chat_history').insert([
+        { cat_id: catId, role: 'user', content: message || 'Gambar', image_base64: imageBase64 },
+        { cat_id: catId, role: 'bot', content: botReply }
+      ]);
+    }
 
     return NextResponse.json({ reply: botReply });
 

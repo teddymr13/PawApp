@@ -6,6 +6,7 @@ import { ChatMessage } from './ChatMessage';
 import { Message } from '@/app/page';
 
 interface ChatInterfaceProps {
+  catId: string | null;
   catName: string;
   catBreed: string;
   catAge: string;
@@ -20,7 +21,7 @@ interface ChatInterfaceProps {
 const EMERGENCY_KEYWORDS = ['keracunan', 'darurat', 'darah', 'patah', 'kejang', 'pingsan', 'tertabrak', 'emergency'];
 
 export function ChatInterface({ 
-  catName, catBreed, catAge, catWeight, isNeutered, allergies, medicalHistory, messages, setMessages 
+  catId, catName, catBreed, catAge, catWeight, isNeutered, allergies, medicalHistory, messages, setMessages 
 }: ChatInterfaceProps) {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -103,6 +104,7 @@ export function ChatInterface({
             medicalHistory: medicalHistory,
           },
           history: messages,
+          catId: catId,
         }),
       });
 

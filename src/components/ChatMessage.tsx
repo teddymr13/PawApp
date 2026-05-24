@@ -3,6 +3,7 @@
 import ReactMarkdown from 'react-markdown';
 import { User, PawPrint } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Activity } from 'lucide-react';
 
 interface ChatMessageProps {
   role: 'user' | 'bot';
@@ -12,6 +13,27 @@ interface ChatMessageProps {
 
 export function ChatMessage({ role, content, imageBase64 }: ChatMessageProps) {
   const isUser = role === 'user';
+
+  // Parse [SCORE: X/10]
+  let displayContent = content;
+  let scoreMatch = displayContent.match(/\[SCORE:\s*(\d+)\/10\]/i);
+  let scoreValue = scoreMatch ? parseInt(scoreMatch[1]) : null;
+  
+  if (scoreMatch) {
+    displayContent = displayContent.replace(scoreMatch[0], '').trim();
+  }
+
+  const getScoreColor = (score: number) => {
+    if (score >= 8) return 'bg-red-50 border-red-200 text-red-700';
+    if (score >= 4) return 'bg-amber-50 border-amber-200 text-amber-700';
+    return 'bg-emerald-50 border-emerald-200 text-emerald-700';
+  };
+
+  const getScoreLabel = (score: number) => {
+    if (score >= 8) return 'Tinggi - SEGERA KE DOKTER HEWAN';
+    if (score >= 4) return 'Sedang - Perlu Observasi';
+    return 'Ringan - Aman / Perawatan Mandiri';
+  };
 
   return (
     <motion.div 
@@ -45,10 +67,22 @@ export function ChatMessage({ role, content, imageBase64 }: ChatMessageProps) {
             </div>
           )}
           {isUser ? (
-            <p className="whitespace-pre-wrap">{content}</p>
+            <p className="whitespace-pre-wrap">{displayContent}</p>
           ) : (
-            <div className="markdown-content">
-              <ReactMarkdown>{content}</ReactMarkdown>
+            <div className="markdown-content space-y-3">
+              <ReactMarkdown>{displayContent}</ReactMarkdown>
+              
+              {scoreValue !== null && (
+                <div className={`mt-4 p-3 rounded-xl border flex items-center gap-3 ${getScoreColor(scoreValue)}`}>
+                  <div className="bg-white/50 p-2 rounded-full shrink-0">
+                    <Activity size={20} />
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider opacity-80">AI Health Score Prediction</p>
+                    <p className="text-sm font-semibold">Keparahan: {scoreValue}/10 ({getScoreLabel(scoreValue)})</p>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
