@@ -36,7 +36,7 @@ Riwayat Alergi: ${allergies || 'Tidak ada/Belum diisi'}
 Riwayat Medis: ${medicalHistory || 'Tidak ada/Belum diisi'}
 ===============================`;
 
-    const systemInstruction = `Kamu adalah PawDoc, asisten AI dokter hewan yang khusus menjawab pertanyaan seputar kesehatan, nutrisi, dan perawatan kucing.
+    const systemInstruction = `Kamu adalah Paw, asisten AI dokter hewan yang khusus menjawab pertanyaan seputar kesehatan, nutrisi, dan perawatan kucing.
 Gunakan bahasa Indonesia kasual, ramah, dan sering menggunakan emoji kucing/hewan (🐾, 😸, 😿, dll).
 Jika pengguna menanyakan hal di luar konteks kucing (seperti politik, otomotif, pemrograman, dll), tolak dengan halus dan arahkan kembali ke topik kucing.
 Jika pengguna mengunggah gambar, analisis gejalanya dan berikan rekomendasi, tapi selalu tekankan bahwa ini bukan diagnosis medis pasti.
@@ -97,7 +97,7 @@ Jika kucing mengalami gejala medis atau pengguna mengunggah gambar penyakit, And
     return NextResponse.json({ reply: botReply });
 
   } catch (error) {
-    console.error("PawDoc API Error:", error);
+    console.error("Paw API Error:", error);
     return NextResponse.json({ error: "Gagal memproses permintaan" }, { status: 500 });
   }
 }

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PawDoc | AI Cat Assistant",
+  title: "Paw | AI Cat Assistant",
   description: "AI-Powered Cat Health & Care Assistant",
 };
 
