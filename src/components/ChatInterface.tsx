@@ -77,7 +77,7 @@ export function ChatInterface({
     if (isEmerg) {
       const p3kMessage: Message = {
         role: 'bot',
-        content: `🚨 **MODE DARURAT LOKAL DIAKTIFKAN** 🚨\n\nPaw mendeteksi kemungkinan kondisi **Kritis/Darurat** dari pesan Anda.\nMohon jangan panik. Berikut panduan P3K instan:\n\n1. **Amankan Kucing**: Pindahkan kucing ke tempat yang aman, sepi, dan datar. Jangan dikerubungi.\n2. **Jangan Asal Beri Minum/Obat**: Jika kucing kejang atau pingsan, JANGAN memaksa memasukkan makanan/air karena bisa tersedak ke paru-paru.\n3. **Hubungi Dokter Hewan**: Kondisi seperti ini memerlukan tindakan medis profesional. Segera hubungi klinik terdekat!\n\n*(Pesan ini dihasilkan seketika secara lokal tanpa jeda server untuk menghemat waktu emas. Harap segera meluncur ke klinik hewan!)*`
+        content: `🚨 **MODE DARURAT LOKAL DIAKTIFKAN** 🚨\n\nPaw Cats mendeteksi kemungkinan kondisi **Kritis/Darurat** dari pesan Anda.\nMohon jangan panik. Berikut panduan P3K instan:\n\n1. **Amankan Kucing**: Pindahkan kucing ke tempat yang aman, sepi, dan datar. Jangan dikerubungi.\n2. **Jangan Asal Beri Minum/Obat**: Jika kucing kejang atau pingsan, JANGAN memaksa memasukkan makanan/air karena bisa tersedak ke paru-paru.\n3. **Hubungi Dokter Hewan**: Kondisi seperti ini memerlukan tindakan medis profesional. Segera hubungi klinik terdekat!\n\n*(Pesan ini dihasilkan seketika secara lokal tanpa jeda server untuk menghemat waktu emas. Harap segera meluncur ke klinik hewan!)*`
       };
       setMessages((prev) => [...prev, p3kMessage]);
       return; // Memotong jalur API (Tidak call Gemini)
@@ -109,7 +109,7 @@ export function ChatInterface({
       });
 
       if (!response.ok) {
-        throw new Error('Gagal menghubungi Paw API');
+        throw new Error('Gagal menghubungi Paw Cats API');
       }
 
       const data = await response.json();
@@ -122,7 +122,7 @@ export function ChatInterface({
       console.error(error);
       setMessages((prev) => [
         ...prev,
-        { role: 'bot', content: 'Maaf, terjadi kesalahan saat mencoba menghubungi server Paw. Mohon coba lagi. 😿' },
+        { role: 'bot', content: 'Maaf, terjadi kesalahan saat mencoba menghubungi server Paw Cats. Mohon coba lagi. 😿' },
       ]);
     } finally {
       setIsLoading(false);
@@ -147,7 +147,7 @@ export function ChatInterface({
         {messages.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center text-center px-4 animate-in fade-in zoom-in duration-500">
             <div className="text-6xl mb-6 bg-white p-6 rounded-full shadow-sm">🐾</div>
-            <h2 className="text-2xl font-bold text-slate-800 mb-3">Halo! Aku Paw.</h2>
+            <h2 className="text-2xl font-bold text-slate-800 mb-3">Halo! Aku Paw Cats.</h2>
             <p className="text-sm text-slate-500 max-w-md leading-relaxed">
               Asisten AI yang siap membantu kamu merawat si meong. Silakan isi profil dan metrik klinis kucingmu di sidebar, lalu tanyakan apa saja!
             </p>
@@ -164,7 +164,7 @@ export function ChatInterface({
                     <Loader2 size={16} className="animate-spin" />
                   </div>
                   <div className={`px-5 py-3.5 rounded-2xl border text-text-main rounded-bl-none shadow-sm flex items-center gap-2 ${isEmergency ? 'bg-emergency-bg border-emergency' : 'bg-white border-slate-100'}`}>
-                    <span className="text-sm text-slate-500 font-medium">Paw sedang menganalisis klinis...</span>
+                    <span className="text-sm text-slate-500 font-medium">Paw Cats sedang menganalisis klinis...</span>
                     <span className="animate-pulse">🐾</span>
                   </div>
                 </div>
@@ -237,7 +237,7 @@ export function ChatInterface({
           </div>
         </form>
         <p className="text-center text-[11px] text-slate-400 mt-3">
-          Paw dapat membuat kesalahan. Harap konsultasikan masalah medis serius ke dokter hewan.
+          Paw Cats dapat membuat kesalahan. Harap konsultasikan masalah medis serius ke dokter hewan.
         </p>
       </div>
     </div>

@@ -20,7 +20,7 @@ Menjadi asisten digital pertolongan pertama terpercaya bagi para pemilik kucing 
 * **UI/UX Kaku & Minim Umpan Balik:** Aplikasi kesehatan sering kali memicu keraguan karena tidak menyediakan indikator status (berhasil/gagal) yang interaktif, informasi singkatan medis yang tidak jelas bagi awam, serta penanda visual tingkat bahaya gejala secara instan.
 
 ### 1.3 Solusi Produk (Product Solution)
-Paw menyediakan antarmuka chatbot interaktif yang ditenagai oleh Next.js, Gemini API, **Penyimpanan Database (Supabase/PostgreSQL)**, dan **Advanced UX/UI Feedback System**. Paw menyerap metrik kesehatan mendalam dari *Smart Sidebar Form*, memberikan notifikasi instan via *Reactive Toast Alerts*, menyediakan glosarium internal via *Contextual Tooltips*, serta mendiagnosis tingkat keparahan gejala secara visual lewat fitur *AI Health Score Prediction*.
+Paw Cats menyediakan antarmuka chatbot interaktif yang ditenagai oleh Next.js, Gemini API, **Penyimpanan Database (Supabase/PostgreSQL)**, dan **Advanced UX/UI Feedback System**. Paw Cats menyerap metrik kesehatan mendalam dari *Smart Sidebar Form*, memberikan notifikasi instan via *Reactive Toast Alerts*, menyediakan glosarium internal via *Contextual Tooltips*, serta mendiagnosis tingkat keparahan gejala secara visual lewat fitur *AI Health Score Prediction*.
 
 ---
 

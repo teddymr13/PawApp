@@ -135,7 +135,7 @@ export function Sidebar({
             <PawPrint size={24} />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-text-main">Paw</h1>
+            <h1 className="text-xl font-bold text-text-main">Paw Cats</h1>
             <p className="text-xs font-medium text-text-muted">Dashboard Klinis AI</p>
           </div>
         </div>

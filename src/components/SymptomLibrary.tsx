@@ -152,7 +152,7 @@ export function SymptomLibrary({ catId }: SymptomLibraryProps) {
             </div>
             <p className="text-sm font-semibold text-text-main mb-1">Artikel Tidak Ditemukan</p>
             <p className="text-xs text-slate-500 mb-4 max-w-[200px] mx-auto leading-relaxed">
-              Paw AI bisa membuatkan artikel medis khusus tentang "{query}" untuk ensiklopedia ini.
+              Paw Cats AI bisa membuatkan artikel medis khusus tentang "{query}" untuk ensiklopedia ini.
             </p>
             <button
               onClick={generateArticle}
